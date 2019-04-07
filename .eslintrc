@@ -1,0 +1,58 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "globals": {
+    "React": true,
+    "document": true,
+    "window": true,
+    "localStorage": true,
+    "fetch": true
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",  // Regex for Component Factory to use,
+                                          // default to "createReactClass"
+      "pragma": "React",  // Pragma to use, default to "React"
+      "version": "detect" // React version. "detect" automatically picks the version you have installed.
+    }
+  },
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "legacyDecorators": true
+    },
+    "ecmaVersion": 9,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "react", "jest"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "no-console": 0,
+    "linebreak-style": ["error", "unix"],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
+    "prettier/prettier": "error",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "indent": ["error", 2],
+    "import/no-extraneous-dependencies": 0
+  }
+}
