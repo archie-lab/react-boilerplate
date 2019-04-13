@@ -12,7 +12,8 @@ module.exports = merge(baseConfig, {
   output: {
     filename: "[name].[hash].js",
     path: paths.outputPath,
-    chunkFilename: "[name].[chunkhash].js"
+    chunkFilename: "[name].[chunkhash].js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -34,16 +35,24 @@ module.exports = merge(baseConfig, {
       }
     ]
   },
+  resolve: {
+    alias: {
+      "react-dom": "@hot-loader/react-dom"
+    }
+  },
   devServer: {
     contentBase: paths.outputPath,
     compress: true,
     host: "localhost",
     disableHostCheck: true,
+    historyApiFallback: true,
+    publicPath: "/",
+    lazy: false,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": "true"
     },
-    port: 3010
+    port: 3001
   },
   plugins: [
     new MiniCssExtractPlugin({

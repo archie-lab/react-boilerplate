@@ -2,7 +2,7 @@ build
 dist
 node_modules
 .idea
-.iml
+*.iml
 
 .npm
 .yarn-integrity

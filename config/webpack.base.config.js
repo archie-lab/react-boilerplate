@@ -2,6 +2,9 @@ const webpack = require("webpack");
 const paths = require("./paths");
 
 process.noDeprecation = true;
+const nodeEnv = process.env.NODE_ENV || "development";
+console.log("nodeEnv", nodeEnv);
+const isProduction = nodeEnv === "production";
 
 module.exports = {
   entry: paths.entryPath,
@@ -32,9 +35,21 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: "file-loader?hash=sha512&digest=hex&name=[name].[hash].[ext]",
             options: {
               outputPath: paths.imagesPath
+            }
+          },
+          {
+            loader: "image-webpack-loader",
+            options: {
+              progressive: true,
+              optimizationLevel: 7,
+              interlaced: false,
+              pngquant: {
+                quality: "65-90",
+                speed: 4
+              }
             }
           }
         ]
@@ -59,8 +74,12 @@ module.exports = {
   plugins: [
     new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __SERVER__: false,
+      __DEV__: !isProduction,
+      env: nodeEnv,
       "process.env": {
-        NODE_ENV: '"production"'
+        NODE_ENV: JSON.stringify(nodeEnv)
       }
     })
   ]
