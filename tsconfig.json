@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "strict": true,
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "removeComments": true,
+    "charset": "utf-8",
+    "lib": ["dom", "es2018","es6", "es5"],
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": [
+    "./src/**/*"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "reportFiles": [
+      "./src/**/*"
+    ]
+  }
+}

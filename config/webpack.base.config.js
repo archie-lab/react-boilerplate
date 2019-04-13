@@ -27,6 +27,11 @@ module.exports = {
         // }
       },
       {
+        test: /\.(ts|tsx)$/,
+        loader: "awesome-typescript-loader",
+        exclude: /(node_modules)/
+      },
+      {
         test: /\.(js|jsx)$/,
         loader: "babel-loader",
         exclude: /(node_modules)/
@@ -69,7 +74,7 @@ module.exports = {
   },
   resolve: {
     modules: ["src", "node_modules"],
-    extensions: ["*", ".js", ".jsx", ".css", ".scss"]
+    extensions: ["*", ".ts", ".tsx", ".js", ".jsx", ".css", ".scss"]
   },
   plugins: [
     new webpack.ProgressPlugin(),

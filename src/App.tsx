@@ -1,13 +1,8 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import "./App.scss";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+class App extends React.Component<{}> {
   render() {
     return <p className="app">Hello</p>;
   }
