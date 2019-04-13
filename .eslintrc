@@ -35,7 +35,7 @@
     "ecmaVersion": 9,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "react", "jest"],
+  "plugins": ["prettier", "react", "react-hooks","jest"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-console": 0,

@@ -12,7 +12,7 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{js,jsx}"],
   coverageReporters: ["json", "lcov", "text-summary"],
   moduleDirectories: ["node_modules", "src"],
-  moduleFileExtensions: ["js", "jsx"],
+  moduleFileExtensions: ["js", "jsx", "json"],
   moduleNameMapper: {
     "^.+.(css|sass)$": "<rootDir>/config/jest/__mocks__/styleMock.js",
     "^.+.(png|jpg|ttf|woff|woff2)$": "<rootDir>/config/jest/__mocks__/fileMock.js"
@@ -21,5 +21,8 @@ module.exports = {
   testEnvironment: "jest-environment-jsdom-global",
   testEnvironmentOptions: {
     resources: "usable"
+  },
+  globals: {
+    __DEV__: true
   }
 };
