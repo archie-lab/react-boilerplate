@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const paths = require("./paths");
 
 process.noDeprecation = true;
@@ -28,8 +29,8 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        loader: "babel-loader",
-        exclude: /(node_modules)/
+        exclude: /(node_modules)/,
+        loader: "babel-loader"
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -82,6 +83,8 @@ module.exports = {
       "process.env": {
         NODE_ENV: JSON.stringify(nodeEnv)
       }
-    })
+    }),
+    new DuplicatePackageCheckerPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|ru|fi/)
   ]
 };

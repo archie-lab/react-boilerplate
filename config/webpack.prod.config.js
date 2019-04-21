@@ -3,6 +3,7 @@ const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const MediaQueryPlugin = require("media-query-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const { GenerateSW } = require("workbox-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
@@ -14,7 +15,7 @@ module.exports = merge(baseConfig, {
   entry: paths.entryPath,
   // You should configure your server to disallow access to the Source Map file for normal users!
   // https://webpack.js.org/configuration/devtool/#devtool
-  devtool: "source-map",
+  devtool: "none", // add source map when you need it
   output: {
     filename: "[name].[hash].js",
     path: paths.outputPath,
@@ -64,7 +65,7 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader", MediaQueryPlugin.loader, "sass-loader"]
       }
     ]
   },
