@@ -2,11 +2,12 @@ const merge = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const paths = require("./paths");
 const baseConfig = require("./webpack.base.config");
 
 module.exports = merge(baseConfig, {
-  mode: "production",
+  mode: "development",
   entry: paths.entryPath,
   devtool: "eval-source-map",
   output: {
@@ -20,12 +21,18 @@ module.exports = merge(baseConfig, {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
+          // enable extracting when you need it in your dev env
+          /*{
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development'
+            }
+          },*/
           "style-loader",
-          // "css-loader",
           {
             loader: "css-loader",
             options: {
-              sourceMap: true,
+              sourceMap: false, // enable when you need it
               modules: false,
               localIdentName: "[path][name]__[local]--[hash:base64:5]"
             }
@@ -67,6 +74,7 @@ module.exports = merge(baseConfig, {
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: "async"
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ]
 });

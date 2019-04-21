@@ -1,9 +1,10 @@
 const webpack = require("webpack");
+const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const paths = require("./paths");
 
 process.noDeprecation = true;
 const nodeEnv = process.env.NODE_ENV || "development";
-console.log("nodeEnv", nodeEnv);
 const isProduction = nodeEnv === "production";
 
 module.exports = {
@@ -33,8 +34,8 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        loader: "babel-loader",
-        exclude: /(node_modules)/
+        exclude: /(node_modules)/,
+        loader: "babel-loader"
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -60,7 +61,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(woff2|ttf|woff|eot)$/,
+        test: /\.(woff2|ttf|woff|eot|txt)$/,
         use: [
           {
             loader: "file-loader",
@@ -78,6 +79,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProgressPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
     new webpack.DefinePlugin({
       __CLIENT__: true,
       __SERVER__: false,
@@ -86,6 +88,8 @@ module.exports = {
       "process.env": {
         NODE_ENV: JSON.stringify(nodeEnv)
       }
-    })
+    }),
+    new DuplicatePackageCheckerPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|ru|fi/)
   ]
 };

@@ -3,7 +3,10 @@ const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const MediaQueryPlugin = require("media-query-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const {GenerateSW} = require("workbox-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 const paths = require("./paths");
 const baseConfig = require("./webpack.base.config");
 
@@ -12,7 +15,7 @@ module.exports = merge(baseConfig, {
   entry: paths.entryPath,
   // You should configure your server to disallow access to the Source Map file for normal users!
   // https://webpack.js.org/configuration/devtool/#devtool
-  devtool: "source-map",
+  devtool: "none", // add source map when you need it
   output: {
     filename: "[name].[hash].js",
     path: paths.outputPath,
@@ -20,11 +23,24 @@ module.exports = merge(baseConfig, {
     publicPath: "/"
   },
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserJSPlugin({
         parallel: true,
         cache: true,
-        sourceMap: true
+        sourceMap: true,
+        terserOptions: {
+          warnings: false,
+          compress: {
+            comparisons: false
+          },
+          parse: {},
+          mangle: true,
+          output: {
+            comments: false,
+            ascii_only: true
+          }
+        }
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
@@ -49,7 +65,7 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader", MediaQueryPlugin.loader, "sass-loader"]
       }
     ]
   },
@@ -62,11 +78,43 @@ module.exports = merge(baseConfig, {
     }),
     new HtmlWebpackPlugin({
       template: paths.templatePath,
-      minify: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
       inject: true
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: "async"
+    }),
+    new WebpackPwaManifest({
+      name: "Hello World",
+      short_name: "Hello World",
+      description: "React Boilerplate Demo",
+      theme_color: "#212121",
+      background_color: "#212121",
+      favicons: [],
+      icons: [
+        {
+          src: paths.faviconPath,
+          sizes: [16, 32, 36, 48, 72, 96, 144, 192, 512],
+          ios: true
+        }
+      ]
+    }),
+    new GenerateSW({
+      swDest: "sw.js",
+      importWorkboxFrom: "local",
+      clientsClaim: true,
+      skipWaiting: true
     })
   ]
 });

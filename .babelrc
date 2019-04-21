@@ -5,10 +5,10 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["last 2 versions", "IE >= 8"],
-          "esmodules": true
+          "browsers": ["last 2 versions", "IE >= 8"]
         },
-        "useBuiltIns": "entry"
+        "useBuiltIns": "entry",
+        "corejs": 3
       }
     ],
     "@babel/preset-react"
@@ -28,7 +28,6 @@
     "@babel/plugin-proposal-export-namespace-from",
     "@babel/plugin-proposal-numeric-separator",
     "@babel/plugin-transform-object-assign",
-    "@babel/plugin-external-helpers",
     "@babel/plugin-proposal-throw-expressions",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-logical-assignment-operators",
