@@ -74,7 +74,7 @@
     "indent": [
       "error",
       2
-    ]
-    //    "import/no-extraneous-dependencies": 0
+    ],
+    "import/no-extraneous-dependencies": 0
   }
 }
