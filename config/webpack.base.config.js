@@ -20,7 +20,7 @@ module.exports = {
     rules: [
       {
         enforce: "pre",
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         loader: "eslint-loader",
         exclude: /(node_modules)/
         // options: {
@@ -29,8 +29,8 @@ module.exports = {
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: "awesome-typescript-loader",
-        exclude: /(node_modules)/
+        exclude: [/(node_modules)/, /\.(test|spec).tsx?$/],
+        use: ["awesome-typescript-loader", "react-docgen-typescript-loader"]
       },
       {
         test: /\.(js|jsx)$/,

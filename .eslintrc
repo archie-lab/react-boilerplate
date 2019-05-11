@@ -28,19 +28,26 @@
       "createClass": "createReactClass",
       "pragma": "React",
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
   },
   "extends": [
-    "airbnb",
-    "eslint:recommended",
-    "plugin:jest/recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "plugin:prettier/recommended",
-    "prettier/react",
-    "prettier/standard"
+    "plugin:@typescript-eslint/recommended",
+//    "airbnb",
+//    "eslint:recommended",
+//    "plugin:jest/recommended",
+//    "plugin:react/recommended",
+//    "prettier",
+//    "plugin:prettier/recommended",
+//    "prettier/react",
+//    "prettier/standard",
+    "prettier/@typescript-eslint"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
@@ -50,6 +57,7 @@
     "sourceType": "module"
   },
   "plugins": [
+    "@typescript-eslint",
     "prettier",
     "react",
     "react-hooks",
@@ -57,7 +65,7 @@
     "unicorn"
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "no-console": 0,
     "linebreak-style": ["error", "unix"],
     "max-len": [

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "strict": true,
@@ -11,8 +11,11 @@
     "jsx": "react",
     "removeComments": true,
     "charset": "utf-8",
-    "lib": ["dom", "es2018","es6", "es5"],
-    "baseUrl": "."
+    "lib": ["dom", "dom.iterable","es2018","es6", "es5"],
+    "baseUrl": ".",
+    "rootDir": ".",
+    "noUnusedLocals": true,
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "dist"],
   "include": [
