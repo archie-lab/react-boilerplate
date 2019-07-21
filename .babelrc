@@ -7,7 +7,7 @@
         "targets": {
           "browsers": ["last 2 versions", "IE >= 8"]
         },
-        "useBuiltIns": "entry",
+        "useBuiltIns": "usage",
         "corejs": 3
       }
     ],
