@@ -31,14 +31,13 @@
     }
   },
   "extends": [
-    "airbnb",
     "eslint:recommended",
-    "plugin:jest/recommended",
+    "plugin:promise/recommended",
     "plugin:react/recommended",
     "prettier",
-    "plugin:prettier/recommended",
     "prettier/react",
-    "prettier/standard"
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
